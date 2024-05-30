@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: curiositymonolith-service-lb
+  namespace: curiositymonolith
+spec:
+  type: LoadBalancer
+  selector:
+    app: curiosity
+  ports:
+    - port: 80
+      targetPort: 8090

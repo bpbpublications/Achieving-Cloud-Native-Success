@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curiositymonolith-deployment
+  namespace: curiositymonolith
+spec:
+  selector:
+    matchLabels:
+      app: curiosity
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: curiosity
+    spec:
+      containers:
+      - name: curiosity
+        image: localhost:5000/curiosity:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8090
+        envFrom:
+          - secretRef:
+              name: curiositymonolith-mysql-db-secret
+          - configMapRef:
+              name: curiositymonolith-configmap

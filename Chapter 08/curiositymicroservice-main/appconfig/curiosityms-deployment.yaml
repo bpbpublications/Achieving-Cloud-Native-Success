@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curiosityms-deployment
+  namespace: curiosityevents
+spec:
+  selector:
+    matchLabels:
+      app: curiosityms
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: curiosityms
+    spec:
+      containers:
+      - name: curiosityms
+        image: localhost:5000/curiosityms:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8090
+        envFrom:
+          - configMapRef:
+              name: curiosityms-configmap-ms
+          - secretRef:
+              name: curiosityms-mysql-db-secret

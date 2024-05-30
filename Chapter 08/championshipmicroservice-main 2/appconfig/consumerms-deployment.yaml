@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumerms-deployment
+  namespace: curiosityevents
+spec:
+  selector:
+    matchLabels:
+      app: consumerms
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: consumerms
+    spec:
+      containers:
+      - name: consumerms
+        image: localhost:5000/consumerms:latest
+        #image: fharris/consumerms:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8090
+        envFrom:
+          - secretRef:
+              name: consumerms-mysql-db-secret
+          - configMapRef:
+              name: consumerms-configmap
+        
