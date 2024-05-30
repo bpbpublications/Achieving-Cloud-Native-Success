@@ -1,2 +1,2 @@
-# Achieving Cloud Native Success
- Achieving Cloud Native Success, by BPB Publications
+# Cloud Native Architecture
+ Cloud Native Architecture, by BPB Publications
